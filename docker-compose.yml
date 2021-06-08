@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+
+  dataflow-server:
+    image: springcloud/spring-cloud-dataflow-server:2.6.0
+    container_name: dataflow-server
+    ports:
+      - "9393:9393"
+    environment:
+      - SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED=false
+      - SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED=false
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/dataflow
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpw
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
+    entrypoint: "./wait-for-it.sh mysql:3306 -- java -jar /maven/spring-cloud-dataflow-server.jar"
