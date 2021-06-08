@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.5.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 apply plugin: "java"
@@ -9,16 +10,20 @@ apply plugin: "io.spring.dependency-management"
 
 group 'com.dataswim'
 version "${appVersion}"
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
 }
 
-repositories {
-    mavenCentral()
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-task'
     compile "org.springframework.boot:spring-boot-starter-batch:${springBootBatchVersion}"
 }
 
