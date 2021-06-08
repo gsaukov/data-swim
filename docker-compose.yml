@@ -10,8 +10,8 @@ services:
     environment:
       - SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED=false
       - SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED=false
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/dataflow
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=rootpw
-      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
-    entrypoint: "./wait-for-it.sh mysql:3306 -- java -jar /maven/spring-cloud-dataflow-server.jar"
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/dataflow
+#      - SPRING_DATASOURCE_USERNAME=root
+#      - SPRING_DATASOURCE_PASSWORD=rootpw
+#      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
+#    entrypoint: "./wait-for-it.sh mysql:3306 -- java -jar /maven/spring-cloud-dataflow-server.jar"
