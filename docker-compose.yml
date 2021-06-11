@@ -15,3 +15,21 @@ services:
 #      - SPRING_DATASOURCE_PASSWORD=rootpw
 #      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
 #    entrypoint: "./wait-for-it.sh mysql:3306 -- java -jar /maven/spring-cloud-dataflow-server.jar"
+
+
+  neo4j:
+    container_name: neo4j
+    image: bitnami/neo4j
+    environment:
+#      - NEO4J_URI=
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=neo4j
+    ports:
+      - 7474:7474
+      - 7473:7473
+      - 7687:7687
+    volumes:
+      - neo4j:/bitnami/neo4j
+
+volumes:
+  neo4j:
