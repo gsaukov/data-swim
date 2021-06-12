@@ -25,7 +25,7 @@ public class Node {
         this.childs.addAll(childs);
     }
 
-    public void addChilds(Map<String, String> payload) {
+    public void addPayload(Map<String, String> payload) {
         this.payload.putAll(payload);
     }
 }
