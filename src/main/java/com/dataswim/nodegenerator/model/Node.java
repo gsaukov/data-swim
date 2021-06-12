@@ -2,10 +2,8 @@ package com.dataswim.nodegenerator.model;
 
 import lombok.Getter;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 public class Node implements Comparable {
@@ -32,33 +30,6 @@ public class Node implements Comparable {
         this.payload.putAll(payload);
     }
 
-    public String asSortedText() {
-        return id.toString() +
-                label +
-                parentId.toString() +
-                payloadAsSortedText() +
-                childsAsSortedText();
-    }
-
-    private String payloadAsSortedText() {
-        Map<String, String> sortedPayload = new TreeMap<>(payload);
-        StringBuilder sortedText = new StringBuilder();
-        for (String key : new TreeMap<>(payload).keySet()) { //Keys are sorted ASC
-            sortedText.append(key + payload.get(key));
-        }
-        return sortedText.toString();
-    }
-
-    private String childsAsSortedText() {
-        List<Node> sortedChilrens = new ArrayList(childs);
-        Collections.sort(sortedChilrens);
-        StringBuilder sortedText = new StringBuilder();
-        for (Node child : sortedChilrens) {
-            sortedText.append(child.asSortedText());
-        }
-        return sortedText.toString();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,5 +53,26 @@ public class Node implements Comparable {
         if (o == null || getClass() != o.getClass()) return 1;
         Node node = (Node) o;
         return node.id.compareTo(this.id);
+    }
+
+    @Override
+    public String toString() {
+        return id + label + parentId + sortedPayloadToString() + sortedChildrenToString();
+    }
+
+    private String sortedPayloadToString() {
+        Map<String, String> sortedPayload = new TreeMap<>(payload);
+        StringBuilder sortedText = new StringBuilder();
+        for (String key : new TreeMap<>(payload).keySet()) { //Keys are sorted ASC
+            sortedText.append(key + payload.get(key));
+        }
+        return sortedText.toString();
+    }
+
+    private String sortedChildrenToString() {
+        List<Node> sortedChilrens = new ArrayList(childs);
+        Collections.sort(sortedChilrens);
+        return sortedChilrens.stream().map(Object::toString)
+                .collect(Collectors.joining(""));
     }
 }
