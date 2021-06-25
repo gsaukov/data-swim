@@ -26,6 +26,7 @@ dependencies {
     compile "org.springframework.cloud:spring-cloud-starter-task"
     compile "org.springframework.boot:spring-boot-starter-batch:${springBootBatchVersion}"
     compile "org.projectlombok:lombok:${lombokVersion}"
+    testCompile "org.testng:testng:${testngVersion}"
 }
 
 test {
