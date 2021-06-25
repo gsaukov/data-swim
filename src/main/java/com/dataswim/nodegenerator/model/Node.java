@@ -17,7 +17,7 @@ public class Node implements Comparable {
     public Node(String label, Node parent) {
         this.id = UUID.randomUUID();
         this.label = label;
-        this.parentId = parent.getId();
+        this.parentId = parent == null ? null : parent.getId();
         this.payload = new HashMap<>();
         this.childs = new ArrayList<>();
     }
