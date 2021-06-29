@@ -1,24 +1,33 @@
 package com.dataswim.nodegenerator.model;
 
 import lombok.Getter;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Getter
+import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
+import static org.springframework.data.neo4j.core.schema.Relationship.Direction.OUTGOING;
 
+@Getter
+@Node("SNode")
 public class SNode implements Comparable {
 
+    @Id
     private final UUID id;
     private final String label;
-    private final UUID parentId;
+    @Relationship(type = "PARENT", direction = OUTGOING)
+    private final SNode parent;
     private final Map<String, String> payload;
+    @Relationship(type = "CHILDS", direction = OUTGOING)
     private final List<SNode> childs;
 
     public SNode(String label, SNode parent) {
         this.id = UUID.randomUUID();
         this.label = label;
-        this.parentId = parent == null ? null : parent.id;
+        this.parent = parent;
         this.payload = new HashMap<>();
         this.childs = new ArrayList<>();
     }
@@ -36,16 +45,12 @@ public class SNode implements Comparable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SNode snode = (SNode) o;
-        return id.equals(snode.id) &&
-                label.equals(snode.label) &&
-                Objects.equals(parentId, snode.parentId) &&
-                childs.equals(snode.childs) &&
-                payload.equals(snode.payload);
+        return id.equals(snode.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, label, parentId, childs, payload);
+        return Objects.hash(id);
     }
 
     @Override
@@ -58,7 +63,7 @@ public class SNode implements Comparable {
 
     @Override
     public String toString() {
-        return id + label + parentId + sortedPayloadToString() + sortedChildrenToString();
+        return id + label + sortedPayloadToString() + sortedChildrenToString();
     }
 
     private String sortedPayloadToString() {
