@@ -27,6 +27,7 @@ dependencyManagement {
 dependencies {
     compile "org.springframework.cloud:spring-cloud-starter-task"
     compile "org.springframework.boot:spring-boot-starter-batch:${springBootBatchVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-neo4j:${springBootNeo4jVersion}"
     compile "org.projectlombok:lombok:${lombokVersion}"
     testCompile "org.testng:testng:${testngVersion}"
 }
