@@ -1,17 +1,17 @@
 package com.dataswim.nodegenerator;
 
-import com.dataswim.nodegenerator.model.Node;
+import com.dataswim.nodegenerator.model.SNode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class NodeTreeCounter {
+public class SNodeTreeCounter {
 
-    public int count(List<Node> roots) {
+    public int count(List<SNode> roots) {
         int counter = 0;
         if(!roots.isEmpty())
-            for(Node root : roots) {
+            for(SNode root : roots) {
                 counter += (count(root.getChilds()) + 1);
             }
         return counter;

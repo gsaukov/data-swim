@@ -6,15 +6,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
-public class Node implements Comparable {
+
+public class SNode implements Comparable {
 
     private final UUID id;
     private final String label;
     private final UUID parentId;
     private final Map<String, String> payload;
-    private final List<Node> childs;
+    private final List<SNode> childs;
 
-    public Node(String label, Node parent) {
+    public SNode(String label, SNode parent) {
         this.id = UUID.randomUUID();
         this.label = label;
         this.parentId = parent == null ? null : parent.id;
@@ -22,7 +23,7 @@ public class Node implements Comparable {
         this.childs = new ArrayList<>();
     }
 
-    public void addChilds(List<Node> childs) {
+    public void addChilds(List<SNode> childs) {
         this.childs.addAll(childs);
     }
 
@@ -34,12 +35,12 @@ public class Node implements Comparable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Node node = (Node) o;
-        return id.equals(node.id) &&
-                label.equals(node.label) &&
-                Objects.equals(parentId, node.parentId) &&
-                childs.equals(node.childs) &&
-                payload.equals(node.payload);
+        SNode snode = (SNode) o;
+        return id.equals(snode.id) &&
+                label.equals(snode.label) &&
+                Objects.equals(parentId, snode.parentId) &&
+                childs.equals(snode.childs) &&
+                payload.equals(snode.payload);
     }
 
     @Override
@@ -51,8 +52,8 @@ public class Node implements Comparable {
     public int compareTo(Object o) {
         if (this == o) return 0;
         if (o == null || getClass() != o.getClass()) return 1;
-        Node node = (Node) o;
-        return node.id.compareTo(this.id);
+        SNode snode = (SNode) o;
+        return snode.id.compareTo(this.id);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class Node implements Comparable {
     }
 
     private String sortedChildrenToString() {
-        List<Node> sortedChilrens = new ArrayList(childs);
+        List<SNode> sortedChilrens = new ArrayList(childs);
         Collections.sort(sortedChilrens);
         return sortedChilrens.stream().map(Object::toString)
                 .collect(Collectors.joining(""));
