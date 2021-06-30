@@ -3,6 +3,7 @@ package com.dataswim.nodegenerator.model;
 import lombok.Getter;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.*;
@@ -17,9 +18,11 @@ public class SNode implements Comparable {
 
     @Id
     private final UUID id;
+    @Property(name="LABEL")
     private final String label;
     @Relationship(type = "PARENT", direction = OUTGOING)
     private final SNode parent;
+    @Property(name="PAYLOAD")
     private final Map<String, String> payload;
     @Relationship(type = "CHILDS", direction = OUTGOING)
     private final List<SNode> childs;
