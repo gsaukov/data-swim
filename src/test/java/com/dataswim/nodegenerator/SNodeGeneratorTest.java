@@ -1,6 +1,8 @@
 package com.dataswim.nodegenerator;
 
 import com.dataswim.nodegenerator.model.SNode;
+import com.dataswim.nodegenerator.services.SNodeGenerator;
+import com.dataswim.nodegenerator.services.SNodeTreeCounter;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
