@@ -1,4 +1,4 @@
-package com.dataswim.nodegenerator;
+package com.dataswim.nodegenerator.services;
 
 import com.dataswim.nodegenerator.model.SNode;
 import org.springframework.stereotype.Service;
