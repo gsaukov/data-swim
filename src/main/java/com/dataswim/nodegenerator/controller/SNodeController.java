@@ -18,7 +18,7 @@ public class SNodeController {
     @GetMapping("/v1/populate")
     public void populate() {
         SNodeGenerator generator = new SNodeGenerator();
-        SNode n = generator.generate(null, 3, 6);
+        SNode n = generator.generate(null, 2, 4);
         repository.save(n);
     }
 
