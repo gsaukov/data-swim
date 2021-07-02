@@ -1,6 +1,9 @@
 package com.dataswim.nodegenerator.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.*;
 
 import java.util.*;
@@ -8,20 +11,22 @@ import java.util.stream.Collectors;
 
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.OUTGOING;
 
+@Setter
 @Getter
+@NoArgsConstructor
 @Node("SNode")
 public class SNode implements Comparable {
 
     @Id
-    private final UUID id;
+    private UUID id;
     @Property(name="LABEL")
-    private final String label;
+    private String label;
     @Relationship(type = "PARENT", direction = OUTGOING)
-    private final SNode parent;
+    private SNode parent;
     @CompositeProperty()
-    private final Map<String, String> payload;
+    private Map<String, String> payload;
     @Relationship(type = "CHILDS", direction = OUTGOING)
-    private final List<SNode> childs;
+    private List<SNode> childs;
 
     public SNode(String label, SNode parent) {
         this.id = UUID.randomUUID();

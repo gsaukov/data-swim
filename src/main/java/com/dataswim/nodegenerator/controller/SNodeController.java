@@ -20,6 +20,8 @@ public class SNodeController {
         SNodeGenerator generator = new SNodeGenerator();
         SNode n = generator.generate(null, 2, 4);
         repository.save(n);
+        SNode t = repository.findById(n.getId()).get();
+        System.out.println(t.getLabel());
     }
 
 }
