@@ -1,6 +1,5 @@
 package com.dataswim.nodegenerator.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,23 +8,26 @@ import org.springframework.data.neo4j.core.schema.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.OUTGOING;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Node("SNode")
+//https://github.com/neo4j/neo4j-ogm/blob/934dcd23825a32f6c3538dba8e2f8d6834540fdd/neo4j-ogm-tests/neo4j-ogm-integration-tests/src/test/java/org/neo4j/ogm/domain/tree/Entity.java
+//https://github.com/neo4j/neo4j-ogm/blob/934dcd23825a32f6c3538dba8e2f8d6834540fdd/neo4j-ogm-tests/neo4j-ogm-integration-tests/src/test/java/org/neo4j/ogm/persistence/examples/tree/TreeIntegrationTest.java
 public class SNode implements Comparable {
 
     @Id
     private UUID id;
     @Property(name="LABEL")
     private String label;
-    @Relationship(type = "PARENT", direction = OUTGOING)
+    @Relationship(type = "REF", direction = OUTGOING)
     private SNode parent;
     @CompositeProperty()
     private Map<String, String> payload;
-    @Relationship(type = "CHILDS", direction = OUTGOING)
+    @Relationship(type = "REF", direction = INCOMING)
     private List<SNode> childs;
 
     public SNode(String label, SNode parent) {
