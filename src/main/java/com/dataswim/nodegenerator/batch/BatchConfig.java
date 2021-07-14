@@ -1,4 +1,5 @@
 package com.dataswim.nodegenerator.batch;
+import com.dataswim.nodegenerator.model.SNode;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
@@ -19,23 +20,25 @@ public class BatchConfig {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-//    @Bean
-//    public Job processJob() {
-//        return jobBuilderFactory.get("processJob")
-//                .incrementer(new RunIdIncrementer()).listener(listener())
-//                .flow(orderStep1()).end().build();
-//    }
+    @Bean
+    public Job processJob() {
+        return jobBuilderFactory.get("processJob")
+                .incrementer(new RunIdIncrementer()).listener(listener())
+                .flow(step()).end().build();
+    }
 
-//    @Bean
-//    public Step step() {
-//        return stepBuilderFactory.get("orderStep1").<String, String> chunk(1)
-//                .reader(new Reader()).processor(new Processor())
-//                .writer(new Writer()).build();
-//    }
+    @Bean
+    public Step step() {
+        return stepBuilderFactory.get("orderStep1").<SNode, SNode> chunk(1)
+                .reader(new SNodeReader())
+                .processor(new SNodeProcessor())
+                .writer(new SNodeWriter())
+                .build();
+    }
 
-//    @Bean
-//    public JobExecutionListener listener() {
-//        return new JobCompletionListener();
-//    }
+    @Bean
+    public JobExecutionListener listener() {
+        return new JobCompletionListener();
+    }
 
 }
