@@ -1,0 +1,543 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: baseSchema
+      author: gsaukov
+      changes:
+        - createTable:
+            tableName: company_description
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: company
+                  type: varchar(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: discount
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: info
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: factory_description
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: position
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(180)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(180)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: prime_cost
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(120)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: product_details
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sell_cost
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_product_id
+                    references: product (id)
+
+        - createTable:
+            tableName: relation_type
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: company_description_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_company_description_id
+                    references: company_description (id)
+              - column:
+                  name:  factory_description_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_factory_description_id
+                    references: factory_description (id)
+
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: user_description
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: relation_type_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_relation_type_id
+                    references: relation_type (id)
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role_id
+                    references: role (id)
+
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(180)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_description_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_description_id
+                    references: user_description (id)
+
+        - createTable:
+            tableName: auth_info_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: users_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fkauth_users_id
+                    references: users (id)
+
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cost
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: users_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_users_id
+                    references: users (id)
+
+        - createTable:
+            tableName: orders_product_details
+            columns:
+              - column:
+                  name: orders_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_orders_id
+                    references: orders (id)
+              - column:
+                  name: product_details_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    unique: true
+                    foreignKeyName: fk_product_details_id
+                    references: product_details (id)
+
+  - changeSet:
+      id: baseInserts
+      author: gsaukov
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: "USER"
+
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: "ADMIN"
+
+        - insert:
+            tableName: factory_description
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: phone
+                  value: "+111111111111111"
+              - column:
+                  name: position
+                  value: "CEO"
+
+        - insert:
+            tableName: factory_description
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: phone
+                  value: "+1111111111111111"
+              - column:
+                  name: position
+                  value: "production manager"
+
+        - insert:
+            tableName: company_description
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: company
+                  value: "Some company"
+              - column:
+                  name: discount
+                  value: 10
+              - column:
+                  name: info
+                  value: "Sales"
+              - column:
+                  name: phone
+                  value: "+1111111111111111"
+
+        - insert:
+            tableName: relation_type
+            columns:
+              - column:
+                  name: factory_description_id
+                  value: 1
+
+        - insert:
+            tableName: relation_type
+            columns:
+              - column:
+                  name: factory_description_id
+                  value: 2
+
+        - insert:
+            tableName: relation_type
+            columns:
+              - column:
+                  name: company_description_id
+                  value: 1
+
+        - insert:
+            tableName: user_description
+            columns:
+              - column:
+                  name: relation_type_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 2
+
+        - insert:
+            tableName: user_description
+            columns:
+              - column:
+                  name: relation_type_id
+                  value: 2
+              - column:
+                  name: role_id
+                  value: 2
+
+        - insert:
+            tableName: user_description
+            columns:
+              - column:
+                  name: relation_type_id
+                  value: 3
+              - column:
+                  name: role_id
+                  value: 1
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "gs@mail.com"
+              - column:
+                  name: full_name
+                  value: "G S"
+              - column:
+                  name: user_description_id
+                  value: 1
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "vs@mail.com"
+              - column:
+                  name: full_name
+                  value: "V S"
+              - column:
+                  name: user_description_id
+                  value: 2
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "ts@mail.com"
+              - column:
+                  name: full_name
+                  value: "T S"
+              - column:
+                  name: user_description_id
+                  value: 3
+
+        - insert:
+            tableName: auth_info_entity
+            columns:
+              - column:
+                  name: login
+                  value: "gs@mail.com"
+              - column:
+                  name: password
+                  value: "$2a$12$vahRQ448Xfywwhqb7SA.teVFJDSOgepL.KDQ7N/FoYeGhlZsns6bO"
+              - column:
+                  name: users_id
+                  value: 1
+
+        - insert:
+            tableName: auth_info_entity
+            columns:
+              - column:
+                  name: login
+                  value: "vs@mail.com"
+              - column:
+                  name: password
+                  value: "$2a$12$vahRQ448Xfywwhqb7SA.teVFJDSOgepL.KDQ7N/FoYeGhlZsns6bO"
+              - column:
+                  name: users_id
+                  value: 2
+
+        - insert:
+            tableName: auth_info_entity
+            columns:
+              - column:
+                  name: login
+                  value: "ts@email.com"
+              - column:
+                  name: password
+                  value: "$2a$12$vahRQ448Xfywwhqb7SA.teVFJDSOgepL.KDQ7N/FoYeGhlZsns6bO"
+              - column:
+                  name: users_id
+                  value: 3
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: category
+                  value: "Plate"
+              - column:
+                  name: name
+                  value: "Prime"
+              - column:
+                  name: prime_cost
+                  value: 2
+              - column:
+                  name: type
+                  value: "Dishware"
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: category
+                  value: "Spoon"
+              - column:
+                  name: name
+                  value: "Elite"
+              - column:
+                  name: prime_cost
+                  value: 40
+              - column:
+                  name: type
+                  value: "Cutlery"
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: category
+                  value: "Fork"
+              - column:
+                  name: name
+                  value: "Elite"
+              - column:
+                  name: prime_cost
+                  value: 12
+              - column:
+                  name: type
+                  value: "Cutlery"
