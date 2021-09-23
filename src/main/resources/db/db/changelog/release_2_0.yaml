@@ -1,0 +1,72 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: createAccountsTable
+      author: gsaukov
+      changes:
+        - createTable:
+            tableName: ACCOUNTS
+            columns:
+              - column:
+                  name: ACCOUNT_NUMBER
+                  type: NUMBER(19)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: AMOUNT
+                  type: NUMBER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: OPENING_DATE
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VALIDITY_PERIOD
+                  type: DATE
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: createAccountsTable
+      author: gsaukov
+      changes:
+        - createTable:
+            tableName: TRANSACTIONS
+            columns:
+              - column:
+                  name: ID
+                  type: NUMBER(19)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: TRANSACTION_TYPE
+                  type: VARCHAR2(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: AMOUNT
+                  type: NUMBER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: DATA_TIME
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ACCOUNT_FROM_ID
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ACCOUNT_TO_ID
+                  type: DATE
+                  constraints:
+                    nullable: false
