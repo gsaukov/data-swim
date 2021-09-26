@@ -5,7 +5,7 @@ databaseChangeLog:
       author: gsaukov
       changes:
         - createTable:
-            tablename: COMPANY_DESCRIPTION
+            tableName: COMPANY_DESCRIPTION
             columns:
               - column:
                   name: ID
@@ -34,7 +34,6 @@ databaseChangeLog:
                   type: varchar(40)
                   constraints:
                     nullable: false
-
         - createTable:
             tableName: FACTORY_DESCRIPTION
             columns:
@@ -55,7 +54,6 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
-
         - createTable:
             tableName: PRODUCT
             columns:
@@ -86,7 +84,6 @@ databaseChangeLog:
                   type: varchar(120)
                   constraints:
                     nullable: false
-
         - createTable:
             tableName: PRODUCT_DETAILS
             columns:
@@ -114,7 +111,6 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: FK_PRODUCT_ID
                     references: PRODUCT (ID)
-
         - createTable:
             tableName: RELATION_TYPE
             columns:
@@ -139,7 +135,6 @@ databaseChangeLog:
                     nullable: true
                     foreignKeyName: FK_FACTORY_DESCRIPTION_ID
                     references: FACTORY_DESCRIPTION (ID)
-
         - createTable:
             tableName: ROLE
             columns:
@@ -156,7 +151,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
-
         - createTable:
             tableName: USER_DESCRIPTION
             columns:
@@ -181,7 +175,6 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: FK_ROLE_ID
                     references: ROLE (ID)
-
         - createTable:
             tableName: USERS
             columns:
@@ -210,7 +203,6 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: FK_USER_DESCRIPTION_ID
                     references: USER_DESCRIPTION (ID)
-
         - createTable:
             tableName: AUTH_INFO_ENTITY
             columns:
@@ -238,7 +230,6 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: FK_AUTH_USERS_ID
                     references: users (ID)
-
         - createTable:
             tableName: ORDERS
             columns:
@@ -276,7 +267,6 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: FK_USERS_ID
                     references: USERS (ID)
-
         - createTable:
             tableName: ORDERS_PRODUCT_DETAILS
             columns:
@@ -309,7 +299,6 @@ databaseChangeLog:
               - column:
                   name: NAME
                   value: "USER"
-
         - insert:
             tableName: ROLE
             columns:
@@ -319,7 +308,6 @@ databaseChangeLog:
               - column:
                   name: NAME
                   value: "ADMIN"
-
         - insert:
             tableName: FACTORY_DESCRIPTION
             columns:
@@ -332,7 +320,6 @@ databaseChangeLog:
               - column:
                   name: POSITION
                   value: "CEO"
-
         - insert:
             tableName: FACTORY_DESCRIPTION
             columns:
@@ -345,9 +332,8 @@ databaseChangeLog:
               - column:
                   name: POSITION
                   value: "PRODUCTion manager"
-
         - insert:
-            tablename: COMPANY_DESCRIPTION
+            tableName: COMPANY_DESCRIPTION
             columns:
               - column:
                   name: ID
@@ -364,28 +350,24 @@ databaseChangeLog:
               - column:
                   name: PHONE
                   value: "+1111111111111111"
-
         - insert:
             tableName: RELATION_TYPE
             columns:
               - column:
                   name: FACTORY_DESCRIPTION_ID
                   value: 1
-
         - insert:
             tableName: RELATION_TYPE
             columns:
               - column:
                   name: FACTORY_DESCRIPTION_ID
                   value: 2
-
         - insert:
             tableName: RELATION_TYPE
             columns:
               - column:
                   name: COMPANY_DESCRIPTION_ID
                   value: 1
-
         - insert:
             tableName: USER_DESCRIPTION
             columns:
@@ -395,7 +377,6 @@ databaseChangeLog:
               - column:
                   name: ROLE_ID
                   value: 2
-
         - insert:
             tableName: USER_DESCRIPTION
             columns:
@@ -405,7 +386,6 @@ databaseChangeLog:
               - column:
                   name: ROLE_ID
                   value: 2
-
         - insert:
             tableName: USER_DESCRIPTION
             columns:
@@ -415,7 +395,6 @@ databaseChangeLog:
               - column:
                   name: ROLE_ID
                   value: 1
-
         - insert:
             tableName: USERS
             columns:
@@ -428,7 +407,6 @@ databaseChangeLog:
               - column:
                   name: USER_DESCRIPTION_ID
                   value: 1
-
         - insert:
             tableName: USERS
             columns:
@@ -441,7 +419,6 @@ databaseChangeLog:
               - column:
                   name: USER_DESCRIPTION_ID
                   value: 2
-
         - insert:
             tableName: USERS
             columns:
@@ -454,7 +431,6 @@ databaseChangeLog:
               - column:
                   name: USER_DESCRIPTION_ID
                   value: 3
-
         - insert:
             tableName: AUTH_INFO_ENTITY
             columns:
@@ -467,7 +443,6 @@ databaseChangeLog:
               - column:
                   name: USERS_ID
                   value: 1
-
         - insert:
             tableName: AUTH_INFO_ENTITY
             columns:
@@ -480,7 +455,6 @@ databaseChangeLog:
               - column:
                   name: USERS_ID
                   value: 2
-
         - insert:
             tableName: AUTH_INFO_ENTITY
             columns:
@@ -493,7 +467,6 @@ databaseChangeLog:
               - column:
                   name: USERS_ID
                   value: 3
-
         - insert:
             tableName: PRODUCT
             columns:
@@ -509,7 +482,6 @@ databaseChangeLog:
               - column:
                   name: TYPE
                   value: "Dishware"
-
         - insert:
             tableName: PRODUCT
             columns:
@@ -525,7 +497,6 @@ databaseChangeLog:
               - column:
                   name: TYPE
                   value: "Cutlery"
-
         - insert:
             tableName: PRODUCT
             columns:

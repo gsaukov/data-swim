@@ -1,6 +1,7 @@
 spring:
   application:
     name: clima
+  .initialize-schema: always
   neo4j:
     uri: bolt://localhost:7687
     authentication:
@@ -20,6 +21,9 @@ spring:
       connectionTimeout: 30000
   liquibase:
     change-log: classpath:db/changelog-master.yaml
+  batch:
+    jdbc:
+      initialize-schema: always
 
 server:
   port: 8080
