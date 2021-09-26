@@ -7,7 +7,7 @@ spring:
       username: neo4j
       password: neo4j
   datasource:
-    url: ${SERVERLESS_DB_URL:serveles_db}
+    url: ${SERVERLESS_DB_URL:jdbc:postgresql://localhost:5432/serveles_db}
     username: ${SERVERLESS_DB_USER:serveles_db}
     password: ${SERVERLESS_DB_PASSWORD:serveles_db}
     type:
