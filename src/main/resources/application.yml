@@ -7,11 +7,11 @@ spring:
       username: neo4j
       password: neo4j
   datasource:
-    url:
-    username: sa
-    password:
+    url: ${SERVERLESS_DB_URL:serveles_db}
+    username: ${SERVERLESS_DB_USER:serveles_db}
+    password: ${SERVERLESS_DB_PASSWORD:serveles_db}
     type:
-    driver-class-name:
+    driver-class-name: org.postgresql.Driver
     hikari:
       minimumIdle: 2
       maximumPoolSize: 6
