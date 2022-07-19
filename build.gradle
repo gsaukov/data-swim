@@ -25,22 +25,22 @@ dependencyManagement {
 }
 
 dependencies {
-    compile "org.springframework.cloud:spring-cloud-starter-task"
-    compile "org.springframework.boot:spring-boot-starter-actuator" // web
-    compile "org.springframework.boot:spring-boot-starter-web" // web
+    implementation "org.springframework.cloud:spring-cloud-starter-task"
+    implementation "org.springframework.boot:spring-boot-starter-actuator" // web
+    implementation "org.springframework.boot:spring-boot-starter-web" // web
 
-    compile "com.graphql-java:graphql-spring-boot-starter:${spingBootGraphql}"
-    compile "com.graphql-java:graphql-java-tools:${graphqlJavaTools}"
+    implementation "com.graphql-java:graphql-spring-boot-starter:${spingBootGraphql}"
+    implementation "com.graphql-java:graphql-java-tools:${graphqlJavaTools}"
 
-    compile "org.postgresql:postgresql"
+    implementation "org.postgresql:postgresql"
 
-    compile "org.springframework.boot:spring-boot-starter-batch:${springBootBatchVersion}"
-    compile "org.springframework.boot:spring-boot-starter-data-neo4j:${springBootNeo4jVersion}"
-    compile "org.projectlombok:lombok:${lombokVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-batch:${springBootBatchVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-neo4j:${springBootNeo4jVersion}"
+    implementation "org.projectlombok:lombok:${lombokVersion}"
 
-    runtime "org.liquibase:liquibase-core:${liquibaseVersion}"
+    runtimeOnly "org.liquibase:liquibase-core:${liquibaseVersion}"
 
-    testCompile "org.testng:testng:${testngVersion}"
+    testImplementation "org.testng:testng:${testngVersion}"
 }
 
 test {
