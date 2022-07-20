@@ -37,6 +37,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-batch:${springBootBatchVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-neo4j:${springBootNeo4jVersion}"
     implementation "org.projectlombok:lombok:${lombokVersion}"
+    implementation "com.thoughtworks.qdox:qdox:${qdoxVersion}"
 
     runtimeOnly "org.liquibase:liquibase-core:${liquibaseVersion}"
 

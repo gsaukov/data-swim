@@ -1,7 +1,6 @@
 spring:
   application:
-    name: clima
-  .initialize-schema: always
+    name: data-swim
   neo4j:
     uri: bolt://localhost:7687
     authentication:
