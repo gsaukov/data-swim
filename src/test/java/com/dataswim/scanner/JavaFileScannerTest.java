@@ -15,7 +15,7 @@ public class JavaFileScannerTest {
         JavaFileScanner scanner = new JavaFileScanner();
         PackageNodeStructureBuilder builder = new PackageNodeStructureBuilder();
         Map<String, JavaClass> map = scanner.findJavaClasses(Path.of(PROJECT_PATH_TO_SCAN).toFile());
-        PackageNode packageNode = new PackageNode("de", "de");
+        PackageNode packageNode = new PackageNode("root", "root"); //root, non package prefix initialization
         for(JavaClass clazz : map.values()) {
             builder.addClass(packageNode, clazz);
         }
