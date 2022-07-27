@@ -19,7 +19,7 @@ public class JavaFileScanner {
         return scanJavaFilesForJavaSources(getJavaFiles(dir));
     }
 
-    private List<File> getJavaFiles(File dir) {
+    public List<File> getJavaFiles(File dir) {
         List<File> files = new ArrayList<>(FileUtils.listFiles(dir,
                 new RegexFileFilter(".*\\.java"),
                 DirectoryFileFilter.DIRECTORY
